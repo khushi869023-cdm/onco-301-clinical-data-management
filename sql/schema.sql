@@ -1,52 +1,67 @@
+-- ONCO-301 Clinical Data Management Database
+-- Database schema
+
+PRAGMA foreign_keys = ON;
+
+-------------
+-- 1. DEMOGRAPHICS
+-------------
+
+
 create table demographics (
     subject_id text primary key,
-    age integer,
-    sex text,
+    age integer NOT NULL,
+    sex text NOT NULL,
     race text,
-    primary_diagnosis text,
-    ecog_status integer,
-    consent_date date,
-    enrollment_date date
+    primary_diagnosis text NOT NULL,
+    ecog_status integer NOT NULL,
+    consent_date date NOT NULL,
+    enrollment_date date NOT NULL,
 
 );
 
-CREATE TABLE adverse_events (
+-- 2. ADVERSE EVENTS
+
+CREATE TABLE IF NOT EXISTS adverse_events (
     ae_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    subject_id TEXT,
-    ae_term TEXT,
-    ae_coded_term TEXT,
-    onset_date TEXT,
-    resolution_date TEXT,
-    ctcae_grade INTEGER,
-    serious TEXT,
-    relationship TEXT,
-    action_taken TEXT,
-    outcome TEXT,
+    subject_id TEXT NOT NULL,
+    verbatim_term TEXT NOT NULL,
+    onset_date DATE NOT NULL,
+    resolution_date DATE NOT NULL,
+    ctcae_grade INTEGER NOT NULL,
+    serious TEXT NOT NULL,
+    relationship TEXT NOT NULL,
+    outcome TEXT NOT NULL,
+
     FOREIGN KEY (subject_id) REFERENCES demographics(subject_id)
 );
 
-CREATE TABLE labs (
+-- 3. LABORATORY DATA
+
+CREATE TABLE IF NOT EXISTS  labs (
     lab_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    subject_id TEXT,
-    visit TEXT,
-    test_code TEXT,
-    result REAL,
-    unit TEXT,
+    subject_id TEXT NOT NULL,
+    visit TEXT NOT NULL,
+    test_code TEXT NOT NULL,
+    result REAL NOT NULL,
+    unit TEXT NOT NULL,
     range_low REAL,
     range_high REAL,
-    normal_indicator TEXT,
-    collection_date TEXT,
+    normal_indicator TEXT NOT NULL,
+    collection_date DATE NOT NULL,
+
     FOREIGN KEY (subject_id) REFERENCES demographics(subject_id)
 );
 
-CREATE TABLE tumor_response (
-    response_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    subject_id TEXT,
-    visit TEXT,
-    assessment_date TEXT,
-    sum_target_lesions REAL,
-    response TEXT,
-    new_lesions TEXT,
+--4. TUMOR RESPONSE
+
+CREATE TABLE IF NOT EXISTS tumor_response (
+    assessment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    subject_id TEXT NOT NULL,
+    assesment_date DATE NOT NULL,
+    sum_target_lesions REAL NOT NULL,
+    response TEXT NOT NULL,
+    new_lesions TEXT NOY NULL,
     confirmed TEXT,
     FOREIGN KEY (subject_id) REFERENCES demographics(subject_id)
 );
