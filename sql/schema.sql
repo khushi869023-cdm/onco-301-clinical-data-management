@@ -16,7 +16,7 @@ create table demographics (
     primary_diagnosis text NOT NULL,
     ecog_status integer NOT NULL,
     consent_date date NOT NULL,
-    enrollment_date date NOT NULL,
+    enrollment_date date NOT NULL
 
 );
 
@@ -61,7 +61,21 @@ CREATE TABLE IF NOT EXISTS tumor_response (
     assesment_date DATE NOT NULL,
     sum_target_lesions REAL NOT NULL,
     response TEXT NOT NULL,
-    new_lesions TEXT NOY NULL,
+    new_lesions TEXT NOT NULL,
     confirmed TEXT,
     FOREIGN KEY (subject_id) REFERENCES demographics(subject_id)
+);
+
+--5. QUERY MANAGEMENT 
+ CREATE TABLE IF NOT EXISTS queries (
+    query_id TEXT PRIMARY KEY,
+    subject_id TEXT NOT NULL,
+    check_id TEXT NOT NULL,
+    field_name TEXT NOT NULL,
+    query_text TEXT NOT NULL,
+    status TEXT NOT NULL,
+    resolution TEXT,
+    raised_date DATE NOT NULL,
+    resolved_date DATE,
+FOREIGN KEY (subject_id) REFERENCES demographics(subject_id)
 );
