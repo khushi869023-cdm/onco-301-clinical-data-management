@@ -7,3 +7,4 @@
 | DEM-005  | Consent Date    | Consent Date must not be after Enrollment Date  | Raise query if violated           |
 | DEM-006  | Enrollment Date | Enrollment Date must not be before Consent Date | Raise query if violated           |
 | DEM-007  | Subject ID      | Subject ID must be unique                       | Raise query/duplicate discrepancy |
+| DEM-008  | ECOG Status     | ECOG must be 0 or 1 at enrollment (protocol eligibility) | Raise query if ECOG is 2 or higher |
