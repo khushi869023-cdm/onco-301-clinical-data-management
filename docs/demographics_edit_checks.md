@@ -11,22 +11,3 @@
 | DEM-007 | Subject ID | Subject ID must be unique | Raise query/duplicate discrepancy |
 | DEM-008 | ECOG Status | ECOG must be 0 or 1 at enrollment (protocol eligibility) | Raise query if ECOG is 2 or higher |
 | DEM-009 | Enrollment Date, First Dose Date | First Dose Date must be on or after Enrollment Date | Raise query if violated |
-| DEM-010 | Consent, Enrollment, First Dose Date | Must not be blank | Raise query if missing |
-
-Query Generation Rules
-
-Each distinct validation failure should generate an appropriate query.
-
-Duplicate or retired checks must not generate additional queries.
-
-Query IDs must remain linked to their original check IDs.
-
-All corrections must be supported by source documentation and recorded in the audit trail.
-
-Notes
-
-DEM-006 is retired; its ID must remain reserved.
-
-DEM-009 and DEM-010 introduce first-dose date validation.
-
-Edit check IDs must never be renumbered or reused.
